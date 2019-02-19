@@ -1,54 +1,58 @@
 package com.lambdaschool.orders.models;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name="agent")
 public class Agent {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Column(nullable = false)
+    private long agentcode;
 
-    private String name;
+    private String agentname;
 
-    private String workingArea;
+    private String workingarea;
 
-    private double commision;
+    private double commission;
 
     private String phone;
 
     private String country;
 
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "agent")
+    private Set<Customer> customers;
+
     public Agent() {
     }
 
-    public long getId() {
-        return id;
+    public long getAgentcode() {
+        return agentcode;
     }
 
-    public String getName() {
-        return name;
+    public String getAgentname() {
+        return agentname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAgentname(String agentname) {
+        this.agentname = agentname;
     }
 
-    public String getWorkingArea() {
-        return workingArea;
+    public String getWorkingarea() {
+        return workingarea;
     }
 
-    public void setWorkingArea(String workingArea) {
-        this.workingArea = workingArea;
+    public void setWorkingarea(String workingarea) {
+        this.workingarea = workingarea;
     }
 
-    public double getCommision() {
-        return commision;
+    public double getCommission() {
+        return commission;
     }
 
-    public void setCommision(double commision) {
-        this.commision = commision;
+    public void setCommission(double commission) {
+        this.commission = commission;
     }
 
     public String getPhone() {
