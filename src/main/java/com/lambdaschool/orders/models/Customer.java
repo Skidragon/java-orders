@@ -3,11 +3,13 @@ package com.lambdaschool.orders.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table (name="customer")
 public class Customer {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private long custcode;
 
@@ -15,27 +17,25 @@ public class Customer {
     private String custname;
 
     private String custcity;
-
     private String workingarea;
-
+    private String custcountry;
     private String grade;
-
     private double openingamt;
-
     private double receiveamt;
-
     private double paymentamt;
-
     private double outstandingamt;
-
     private String phone;
 
     @ManyToOne
-    @JoinColumn(name="agentcode", nullable = false)
+    @JoinColumn(name = "agentcode", nullable = false)
     @JsonIgnore
     private Agent agent;
 
-    public Customer() {
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "customer")
+    private Set<Order> orders;
+
+    public Customer()
+    {
     }
 
     public long getCustcode() {
@@ -64,6 +64,14 @@ public class Customer {
 
     public void setWorkingarea(String workingarea) {
         this.workingarea = workingarea;
+    }
+
+    public String getCustcountry() {
+        return custcountry;
+    }
+
+    public void setCustcountry(String custcountry) {
+        this.custcountry = custcountry;
     }
 
     public String getGrade() {

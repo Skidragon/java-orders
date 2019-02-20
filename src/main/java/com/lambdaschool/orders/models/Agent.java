@@ -4,12 +4,19 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="agent")
+@Table(name="agents")
 public class Agent {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private long agentcode;
+
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "agent")
+    private Set<Customer> customers;
+
+    @OneToMany( cascade = CascadeType.DETACH, mappedBy = "agent")
+    private Set<Order> orders;
 
     private String agentname;
 
@@ -21,14 +28,28 @@ public class Agent {
 
     private String country;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "agent")
-    private Set<Customer> customers;
-
-    public Agent() {
+    public Agent()
+    {
     }
 
     public long getAgentcode() {
         return agentcode;
+    }
+
+    public Set<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 
     public String getAgentname() {

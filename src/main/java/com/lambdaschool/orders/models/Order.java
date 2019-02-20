@@ -1,36 +1,35 @@
 package com.lambdaschool.orders.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name="order")
+@Table(name="orders")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private long ordnum;
+    private long ordernum;
 
     private double ordamount;
 
     private double advanceamount;
 
     @ManyToOne
-    @JoinColumn(name="custcode", nullable=false)
-    @JsonIgnore
+    @JoinColumn(name = "custcode", nullable = false)
     private Customer customer;
 
     @ManyToOne
-    @JoinColumn(name="agentcode", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "agentcode", nullable = false)
     private Agent agent;
 
+    private String orddescription;
 
-    public Order() {
+    public Order()
+    {
     }
 
-    public long getOrdnum() {
-        return ordnum;
+    public long getOrdernum() {
+        return ordernum;
     }
 
     public double getOrdamount() {
@@ -63,5 +62,13 @@ public class Order {
 
     public void setAgent(Agent agent) {
         this.agent = agent;
+    }
+
+    public String getOrddescription() {
+        return orddescription;
+    }
+
+    public void setOrddescription(String orddescription) {
+        this.orddescription = orddescription;
     }
 }
