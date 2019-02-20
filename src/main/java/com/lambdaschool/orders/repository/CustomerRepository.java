@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-    @Query(value = "SELECT c.custname, o.ordernum, o.ordamount, o.orddescription FROM customer AS c INNER JOIN orders AS o WHERE c.custname = o.custcode ORDER BY c.custcode ASC", nativeQuery = true)
+    @Query(value = "SELECT c.custname, o.ordernum, o.ordamount, o.orddescription FROM customer AS c INNER JOIN orders AS o WHERE c.custcode = o.custcode ORDER BY c.custcode ASC", nativeQuery = true)
     List<Object[]> findCustomersWithOrders();
 
 
