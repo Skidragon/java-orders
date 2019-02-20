@@ -4,9 +4,7 @@ import com.lambdaschool.orders.models.Agent;
 import com.lambdaschool.orders.repository.AgentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +24,8 @@ public class AgentController {
         return agentRepo.agentOrders();
     }
 
+    @DeleteMapping("{id}")
+    public void deleteAgentByCode(@PathVariable Long id) {
+        agentRepo.deleteById(id);
+    }
 }
