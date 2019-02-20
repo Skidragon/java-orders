@@ -16,14 +16,14 @@ public class AgentController {
     @Autowired
     AgentRepository agentRepo;
 
-    @GetMapping("/")
+    @GetMapping("")
     public List<Agent> allAgents() {
         return agentRepo.findAll();
     }
-//
-//    @GetMapping("/orders")
-//    public List<Object[]> agentOrders() {
-//        return
-//    }
+
+    @GetMapping("orders")
+    public List<Object[]> agentOrders() {
+        return agentRepo.agentOrders();
+    }
 
 }
