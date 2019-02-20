@@ -5,6 +5,7 @@ import com.lambdaschool.orders.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,10 @@ public class CustomerController {
         return custRepo.findAll();
     }
 
+    @GetMapping("name/{name}")
+    public List<Object[]> allOrdersForOneCustomer(@PathVariable String name) {
+        return custRepo.findAllOrdersForCustomer(name);
+    }
     @GetMapping("order")
     public List<Object[]> customersAndOrders() {
         return custRepo.findCustomersWithOrders();
